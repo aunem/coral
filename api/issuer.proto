@@ -1,0 +1,75 @@
+
+syntax = "proto3";
+
+package issuer;
+import "google/api/annotations.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/issuer";
+
+service IssuerService {
+  rpc GetIssuer(IDQuery) returns (Issuer) {
+    option (google.api.http) = {
+      get: "/issuer/{id}"
+    }; 
+  }
+
+  rpc ListIssuers(Query) returns (Issuers) {
+    option (google.api.http) = {
+      get: "/issuer"
+    }; 
+  }
+
+  rpc CreateIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      post: "/issuer"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdateIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      put: "/issuer/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      patch: "/issuer/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeleteIssuer(IDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/issuer/{id}"
+    }; 
+  }
+}
+
+message Issuer {
+  string id = 1; //`gorm:"primary_key"`
+  int64 createdTime = 2;
+  int64 updateTime = 3;
+  string name = 4;
+  string issuer = 5;
+  string jwksUri = 6;
+  string issuerClaim = 7;
+  string subjectClaim = 8;
+  string expiresClaim = 9;
+}
+
+message Issuers {
+  repeated Issuer issuers = 1;
+}
+
+message IDQuery {
+  string id = 1;
+}
+
+message Query {
+  string name = 1;
+  string issuer = 2;
+}
+
+message Empty {}

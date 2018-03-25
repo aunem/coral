@@ -1,0 +1,336 @@
+
+syntax = "proto3";
+
+package api;
+import "google/api/annotations.proto";
+
+service Coral {
+
+  rpc Authorize(AuthorizationRequest) returns (AuthorizationResponse) {
+    option (google.api.http) = {
+      post: "/authorize"
+      body: "*"
+    };
+  }
+
+  rpc AuthorizeAndSign(AuthorizationRequest) returns (AuthorizationSigningResponse) {
+    option (google.api.http) = {
+      post: "/authorize/sign"
+      body: "*"
+    };
+  }
+
+  rpc Sign(SigningRequest) returns (SigningResponse) {
+    option (google.api.http) = {
+      post: "/sign"
+      body: "*"
+    };
+  }
+
+  rpc SignPayload(SigningPayloadRequest) returns (SigningPayloadResponse) {
+    option (google.api.http) = {
+      post: "/sign/payload"
+      body: "*"
+    };
+  }
+
+  rpc EntityInfo(JWTEnc) returns (Entity) {
+    option (google.api.http) = {
+      post: "/entity-info"
+      body: "*"
+    };
+  }
+
+  rpc WellKnown(Empty) returns (WellKnownResponse) {
+    option (google.api.http) = {
+      get: "/.well-known"
+    };
+  }
+
+  rpc JWKs(Empty) returns (JWKsResponse) {
+    option (google.api.http) = {
+      get: "/.well-known/jwks.json"
+    };
+  }
+
+  rpc GetEntity(EntityIDQuery) returns (Entity) {
+    option (google.api.http) = {
+      get: "/entity/{id}"
+    }; 
+  }
+
+  rpc ListEntity(EntityQuery) returns (EntityList) {
+    option (google.api.http) = {
+      get: "/entity"
+    }; 
+  }
+
+  rpc CreateEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      post: "/entity"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdateEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      put: "/entity/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      patch: "/entity/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeleteEntity(EntityIDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/entity/{id}"
+    }; 
+  }
+
+  rpc GetIssuer(IssuerIDQuery) returns (Issuer) {
+    option (google.api.http) = {
+      get: "/issuer/{id}"
+    }; 
+  }
+
+  rpc ListIssuers(IssuerQuery) returns (IssuerList) {
+    option (google.api.http) = {
+      get: "/issuer"
+    }; 
+  }
+
+  rpc CreateIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      post: "/issuer"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdateIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      put: "/issuer/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchIssuer(Issuer) returns (Issuer) {
+    option (google.api.http) = {
+      patch: "/issuer/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeleteIssuer(IssuerIDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/issuer/{id}"
+    }; 
+  }
+
+  rpc GetPolicy(PolicyIDQuery) returns (Policy) {
+    option (google.api.http) = {
+      get: "/policy/{id}"
+    }; 
+  }
+
+  rpc ListPolicies(PolicyQuery) returns (PolicyList) {
+    option (google.api.http) = {
+      get: "/policy"
+    }; 
+  }
+
+  rpc CreatePolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      post: "/policy"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdatePolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      put: "/policy/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchPolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      patch: "/policy/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeletePolicy(PolicyIDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/policy/{id}"
+    }; 
+  }
+  
+}
+
+// Auth
+message AuthorizationRequest {
+  string jwt = 1;
+  string path = 2;
+  map<string, string> headers = 3;
+  string ip = 4;
+  string requestID = 5;
+  bool charge = 6;
+}
+
+message AuthorizationResponse {
+  bool allowed = 1;
+  Entity entity = 2;
+}
+
+message AuthorizationSigningResponse {
+  bool allowed = 1;
+  string jwt = 2;
+}
+
+message SigningRequest {
+  string jwt = 1;
+}
+
+message SigningResponse {
+  string jwt = 1;
+}
+
+message SigningPayloadRequest {
+  string payload = 1;
+}
+
+message SigningPayloadResponse {
+  string jwt = 1;
+}
+
+message WellKnownResponse {
+  string issuer = 1;
+  string jwksUri = 2;
+}
+
+message JWKsResponse {
+  map<string, JWKEnc> keys = 1;
+}
+
+message JWTEnc {
+  string jwt = 1;
+  int64 expires = 2;
+}
+
+message JWKEnc {
+  string jwk = 1;
+  int64 expires = 2;
+}
+
+// Entity
+message Entity {
+  string version = 1;
+  string id = 2;
+  map<string, string> attributes = 3;
+  repeated EntityAuth authentication = 4;
+  repeated EntityBilling billing = 5;
+}
+
+message EntityAuth {
+  string name = 1;
+  map<string, string> claims = 2;
+}
+
+message EntityBilling {
+  string account = 1;
+  string id = 2;
+}
+
+message EntityIDQuery {
+  int64 id = 1;
+}
+
+message EntityQuery {
+  int64 id = 1;
+  repeated string attributes = 2;
+}
+
+message EntityList {
+  repeated Entity entities = 1;
+}
+
+// Issuer
+message Issuer {
+  string version = 1;
+  string id = 2;
+  string name = 3;
+  string issuer = 4;
+  string jwksUri = 5;
+  string issuerClaim = 6;
+  string subjectClaim = 7;
+  string expiresClaim = 8;
+}
+
+message IssuerIDQuery {
+  int64 id = 1;
+}
+
+message IssuerQuery {
+  string name = 1;
+  string issuer = 2;
+}
+
+message IssuerList {
+  repeated Issuer issuer = 1;
+}
+
+// Policy
+message Policy {
+  string id = 1;
+  string name = 2;
+  map<string, string> entityAttributes = 3;
+  string effect = 4;
+  RequestAttributes requestAttributes = 5;
+  map<string, RouteArray> http = 6;
+  map<string, MethodPolicy> grpc = 7;
+}
+
+message RequestAttributes{
+  map<string, string> headers = 1;
+  string ip = 2;
+  string host = 3;
+  string query = 4;
+}
+
+message RouteArray {
+  repeated RoutePolicy routePolicies = 1;
+}
+
+message RoutePolicy {
+  string actions = 1;
+  RequestAttributes requestAttributes = 2;
+}
+
+message MethodArray {
+  repeated MethodPolicy methodPolicies = 1;
+}
+
+message MethodPolicy {
+  RequestAttributes requestAttributes = 1;
+}
+
+message PolicyIDQuery {
+  int64 id = 1;
+}
+
+message PolicyQuery {
+  repeated string entityAttributes = 1;
+}
+
+message PolicyList {
+  repeated Policy policies = 1;
+}
+
+// Billing
+
+message Empty {}

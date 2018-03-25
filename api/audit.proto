@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package audit;
+import "google/api/annotations.proto";
+import "api/entity.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/audit";
+
+service AuditService {
+
+    rpc GetRecord(IDQuery) returns (AuditRecord) {
+        option (google.api.http) = {
+            get: "/record/{id}"
+        }; 
+    }
+
+    rpc ListRecords(ListQuery) returns (AuditRecords) {
+        option (google.api.http) = {
+            get: "/records"
+        }; 
+    }
+
+    rpc CreateRecord(AuditRecord) returns (entity.Empty) {
+        option (google.api.http) = {
+            post: "/record"
+            body: "*"
+        }; 
+    }
+
+    rpc RetireRecords(RetireQuery) returns (entity.Empty) {
+        option (google.api.http) = {
+            post: "/record/retire"
+            body: "*"
+        }; 
+    }
+}
+
+message AuditRecord {
+    string id = 1;
+    int64 createdTime = 2;
+    int64 updateTime = 3;
+    string requestID = 4;
+    entity.Entity entity = 5;
+    Authentication authentication = 6;
+    Response response = 7;
+    Billing billing = 8;
+}
+
+message AuditRecords {
+    repeated AuditRecord auditRecords = 1;
+}
+
+message Authentication {
+    string type = 1;
+    string token = 2;
+    string issuer = 3;
+}
+
+message Response {
+    int32 code = 1;
+    string body = 2;
+}
+
+message Billing {
+    bool billed = 1;
+    string account = 2;
+    string ammount = 3;
+}
+
+message RetireQuery {
+    int32 daysBack = 1;
+}
+
+message IDQuery {
+    string id = 1;
+    string name = 2;
+}
+  
+message ListQuery {
+    map<string, string> entityAttributes = 1;
+}
+  

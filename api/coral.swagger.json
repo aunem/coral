@@ -1,0 +1,1007 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/coral.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/.well-known": {
+      "get": {
+        "operationId": "WellKnown",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiWellKnownResponse"
+            }
+          }
+        },
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/.well-known/jwks.json": {
+      "get": {
+        "operationId": "JWKs",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiJWKsResponse"
+            }
+          }
+        },
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/authorize": {
+      "post": {
+        "operationId": "Authorize",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiAuthorizationResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiAuthorizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/authorize/sign": {
+      "post": {
+        "operationId": "AuthorizeAndSign",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiAuthorizationSigningResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiAuthorizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/entity": {
+      "get": {
+        "operationId": "ListEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntityList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "attributes",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "post": {
+        "operationId": "CreateEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/entity-info": {
+      "post": {
+        "operationId": "EntityInfo",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiJWTEnc"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/entity/{id}": {
+      "get": {
+        "operationId": "GetEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "put": {
+        "operationId": "UpdateEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "patch": {
+        "operationId": "PatchEntity",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiEntity"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/issuer": {
+      "get": {
+        "operationId": "ListIssuers",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiIssuerList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "issuer",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "post": {
+        "operationId": "CreateIssuer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/issuer/{id}": {
+      "get": {
+        "operationId": "GetIssuer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "delete": {
+        "operationId": "DeleteIssuer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "put": {
+        "operationId": "UpdateIssuer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "patch": {
+        "operationId": "PatchIssuer",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiIssuer"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/policy": {
+      "get": {
+        "operationId": "ListPolicies",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiPolicyList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "entityAttributes",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "post": {
+        "operationId": "CreatePolicy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/policy/{id}": {
+      "get": {
+        "operationId": "GetPolicy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "delete": {
+        "operationId": "DeletePolicy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "put": {
+        "operationId": "UpdatePolicy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      },
+      "patch": {
+        "operationId": "PatchPolicy",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPolicy"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/sign": {
+      "post": {
+        "operationId": "Sign",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiSigningResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSigningRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    },
+    "/sign/payload": {
+      "post": {
+        "operationId": "SignPayload",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/apiSigningPayloadResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiSigningPayloadRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Coral"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiAuthorizationRequest": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ip": {
+          "type": "string"
+        },
+        "requestID": {
+          "type": "string"
+        },
+        "charge": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "Auth"
+    },
+    "apiAuthorizationResponse": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "entity": {
+          "$ref": "#/definitions/apiEntity"
+        }
+      }
+    },
+    "apiAuthorizationSigningResponse": {
+      "type": "object",
+      "properties": {
+        "allowed": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "jwt": {
+          "type": "string"
+        }
+      }
+    },
+    "apiEmpty": {
+      "type": "object"
+    },
+    "apiEntity": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "authentication": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiEntityAuth"
+          }
+        },
+        "billing": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiEntityBilling"
+          }
+        }
+      },
+      "title": "Entity"
+    },
+    "apiEntityAuth": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "claims": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiEntityBilling": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiEntityList": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiEntity"
+          }
+        }
+      }
+    },
+    "apiIssuer": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "jwksUri": {
+          "type": "string"
+        },
+        "issuerClaim": {
+          "type": "string"
+        },
+        "subjectClaim": {
+          "type": "string"
+        },
+        "expiresClaim": {
+          "type": "string"
+        }
+      },
+      "title": "Issuer"
+    },
+    "apiIssuerList": {
+      "type": "object",
+      "properties": {
+        "issuer": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiIssuer"
+          }
+        }
+      }
+    },
+    "apiJWKEnc": {
+      "type": "object",
+      "properties": {
+        "jwk": {
+          "type": "string"
+        },
+        "expires": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "apiJWKsResponse": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiJWKEnc"
+          }
+        }
+      }
+    },
+    "apiJWTEnc": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        },
+        "expires": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "apiMethodPolicy": {
+      "type": "object",
+      "properties": {
+        "requestAttributes": {
+          "$ref": "#/definitions/apiRequestAttributes"
+        }
+      }
+    },
+    "apiPolicy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "entityAttributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "effect": {
+          "type": "string"
+        },
+        "requestAttributes": {
+          "$ref": "#/definitions/apiRequestAttributes"
+        },
+        "http": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiRouteArray"
+          }
+        },
+        "grpc": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiMethodPolicy"
+          }
+        }
+      },
+      "title": "Policy"
+    },
+    "apiPolicyList": {
+      "type": "object",
+      "properties": {
+        "policies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPolicy"
+          }
+        }
+      }
+    },
+    "apiRequestAttributes": {
+      "type": "object",
+      "properties": {
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "ip": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "apiRouteArray": {
+      "type": "object",
+      "properties": {
+        "routePolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRoutePolicy"
+          }
+        }
+      }
+    },
+    "apiRoutePolicy": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "string"
+        },
+        "requestAttributes": {
+          "$ref": "#/definitions/apiRequestAttributes"
+        }
+      }
+    },
+    "apiSigningPayloadRequest": {
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "apiSigningPayloadResponse": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        }
+      }
+    },
+    "apiSigningRequest": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        }
+      }
+    },
+    "apiSigningResponse": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        }
+      }
+    },
+    "apiWellKnownResponse": {
+      "type": "object",
+      "properties": {
+        "issuer": {
+          "type": "string"
+        },
+        "jwksUri": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

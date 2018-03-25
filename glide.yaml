@@ -1,0 +1,25 @@
+package: github.com/kubecorp/coral
+import:
+- package: github.com/golang/glog
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto
+- package: github.com/grpc-ecosystem/grpc-gateway
+  subpackages:
+  - runtime
+  - utilities
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: github.com/go-pg/pg
+- package: google.golang.org/genproto
+  subpackages:
+  - googleapis/api/annotations
+- package: google.golang.org/grpc
+  subpackages:
+  - codes
+  - grpclog
+  - status
+- package: github.com/imdario/mergo
+- package: github.com/spf13/cobra
+- package: github.com/spf13/pflag

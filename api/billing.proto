@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package billing;
+import "google/api/annotations.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/billing";
+
+service BillingService {
+
+  rpc Bill(BillingRequest) returns (BillingResponse) {
+    option (google.api.http) = {
+      post: "/bill"
+      body: "*"
+    };
+  }
+
+  rpc GetAccount(IDQuery) returns (Account) {
+    option (google.api.http) = {
+      get: "/account/{id}"
+    }; 
+  }
+
+  rpc ListAccounts(ListQuery) returns (Accounts) {
+    option (google.api.http) = {
+      get: "/accounts"
+    }; 
+  }
+
+  rpc CreateAccount(Account) returns (Account) {
+    option (google.api.http) = {
+      post: "/account"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdateAccount(Account) returns (Account) {
+    option (google.api.http) = {
+      put: "/account/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchAccount(Account) returns (Account) {
+    option (google.api.http) = {
+      patch: "/account/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeleteAccount(IDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/account/{id}"
+    }; 
+  }
+
+}
+
+message BillingRequest {
+  string requestID = 1;
+
+}
+
+message BillingResponse {
+  bool successful = 1;
+}
+
+message IDQuery {
+  string id = 1;
+  string name = 2;
+}
+
+message ListQuery {
+  map<string, string> entityAttributes = 1;
+}
+
+message Account {
+  string id = 1;
+  int64 createdTime = 2;
+  int64 updateTime = 3;
+  string name = 4;
+  string preferred = 5;
+  repeated StripeAccount stripe = 6;
+}
+
+message Accounts {
+  repeated Account accounts = 1;
+}
+
+message StripeAccount {
+  string id = 1;
+  string type = 2;
+  int64 recordPer = 3;
+  bool verified = 4;
+}
+
+message Empty {}
+  

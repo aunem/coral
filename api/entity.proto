@@ -1,0 +1,98 @@
+
+syntax = "proto3";
+
+package entity;
+import "google/api/annotations.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/entity";
+
+service EntityService {
+
+  rpc GetEntity(IDQuery) returns (Entity) {
+    option (google.api.http) = {
+      get: "/entity/{id}"
+    }; 
+  }
+
+  rpc ListEntities(Query) returns (Entities) {
+    option (google.api.http) = {
+      get: "/entity"
+    }; 
+  }
+
+  rpc CreateEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      post: "/entity"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdateEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      put: "/entity/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchEntity(Entity) returns (Entity) {
+    option (google.api.http) = {
+      patch: "/entity/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeleteEntity(IDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/entity/{id}"
+    }; 
+  }
+}
+
+// Entity
+message Entity {
+  string id = 1;
+  int64 createdTime = 2;
+  int64 updateTime = 3;
+  map<string, string> attributes = 4;
+  EntityAuth authentication = 5;
+  repeated EntityBilling billing = 6;
+}
+
+message EntityAuth {
+  repeated BasicAuth basic = 1;
+  repeated JWTAuth jwt = 2;
+}
+
+message BasicAuth {
+  string id = 1;
+  string secret = 2;
+  repeated string tags = 3;
+  int64 timestamp = 4;
+}
+
+message JWTAuth {
+  string name = 1;
+  map<string, string> claims = 2;
+}
+
+message EntityBilling {
+  string account = 1;
+  string id = 2;
+}
+
+message IDQuery {
+  string id = 1;
+  string keyId = 2;
+  JWTAuth claims = 3;
+}
+
+message Query {
+  string id = 1;
+  repeated string attributes = 2;
+}
+
+message Entities {
+  repeated Entity entities = 1;
+}
+
+message Empty {}

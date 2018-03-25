@@ -1,0 +1,96 @@
+
+syntax = "proto3";
+
+package policy;
+import "google/api/annotations.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/policy";
+
+service PolicyService {
+
+  rpc GetPolicy(IDQuery) returns (Policy) {
+    option (google.api.http) = {
+      get: "/policy/{id}"
+    }; 
+  }
+
+  rpc ListPolicies(Query) returns (Policies) {
+    option (google.api.http) = {
+      get: "/policy"
+    }; 
+  }
+
+  rpc CreatePolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      post: "/policy"
+      body: "*"
+    }; 
+  }
+
+  rpc UpdatePolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      put: "/policy/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc PatchPolicy(Policy) returns (Policy) {
+    option (google.api.http) = {
+      patch: "/policy/{id}"
+      body: "*"
+    }; 
+  }
+
+  rpc DeletePolicy(IDQuery) returns (Empty) {
+    option (google.api.http) = {
+      delete: "/policy/{id}"
+    }; 
+  }
+}
+
+message Policy {
+  string id = 1;
+  int64 createdTime = 2;
+  int64 updateTime = 3;
+  string name = 4;
+  map<string, string> entityAttributes = 5;
+  string effect = 6;
+  RequestAttributes requestAttributes = 7;
+  repeated RoutePolicy http = 8;
+  repeated MethodPolicy grpc = 9;
+}
+
+message RoutePolicy {
+  string path = 1;
+  map<string, string> query = 2;
+  repeated string actions = 3;
+  RequestAttributes requestAttributes = 4;
+}
+
+message RequestAttributes{
+  map<string, string> headers = 1;
+  string cidr = 2;
+  string host = 3;
+}
+
+message MethodPolicy {
+  string service = 1;
+  repeated string methods = 2;
+  map<string, string> parameters = 3;
+  RequestAttributes requestAttributes = 4;
+}
+
+message IDQuery {
+  string id = 1;
+  string name = 2;
+}
+
+message Query {
+  map<string, string> entityAttributes = 1;
+}
+
+message Policies {
+  repeated Policy policies = 1;
+}
+
+message Empty {}

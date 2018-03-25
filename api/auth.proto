@@ -1,0 +1,136 @@
+syntax = "proto3";
+
+package auth;
+import "google/api/annotations.proto";
+import "api/entity.proto";
+
+option go_package = "github.com/kubecorp/coral/sdk/go/auth";
+
+service AuthService {
+
+  rpc Authorize(AuthorizationRequest) returns (AuthorizationResponse) {
+    option (google.api.http) = {
+      post: "/authorize"
+      body: "*"
+    };
+  }
+
+  rpc AuthorizeAndSign(AuthorizationRequest) returns (AuthorizationSigningResponse) {
+    option (google.api.http) = {
+      post: "/authorize/sign"
+      body: "*"
+    };
+  }
+
+  rpc Sign(SigningRequest) returns (SigningResponse) {
+    option (google.api.http) = {
+      post: "/sign"
+      body: "*"
+    };
+  }
+
+  rpc SignPayload(SigningPayloadRequest) returns (SigningPayloadResponse) {
+    option (google.api.http) = {
+      post: "/sign/payload"
+      body: "*"
+    };
+  }
+
+  rpc SignBasic(Empty) returns (SigningResponse) {
+    option (google.api.http) = {
+      post: "/sign/basic"
+      body: "*"
+    };
+  }
+
+  rpc EntityInfo(JWTEnc) returns (entity.Entity) {
+    option (google.api.http) = {
+      post: "/entity-info"
+      body: "*"
+    };
+  }
+
+  rpc WellKnown(Empty) returns (WellKnownResponse) {
+    option (google.api.http) = {
+      get: "/.well-known"
+    };
+  }
+
+  rpc JWKs(Empty) returns (JWKsResponse) {
+    option (google.api.http) = {
+      get: "/.well-known/jwks.json"
+    };
+  }
+}
+
+  message AuthorizationRequest {
+    HTTPRequest http = 1;
+    GRPCRequest grpc = 2;
+    map<string, HeaderVals> headers = 3;
+    string remoteAddr = 4;
+    string host = 5;
+    string requestID = 6;
+    bool charge = 7;
+  }
+  message HeaderVals {
+    repeated string values = 1;
+  }
+
+  message HTTPRequest {
+    string path = 1;
+    string action = 2;
+    map<string, string> query = 3;
+  }
+
+  message GRPCRequest {
+    string service = 1;
+    string method = 2;
+    map<string, string> parameters = 3; //TODO: this should probably be of type 'any'
+  }
+  
+  message AuthorizationResponse {
+    bool allowed = 1;
+    entity.Entity entity = 2;
+  }
+  
+  message AuthorizationSigningResponse {
+    bool allowed = 1;
+    string jwt = 2;
+  }
+  
+  message SigningRequest {
+    string jwt = 1;
+  }
+  
+  message SigningResponse {
+    string jwt = 1;
+  }
+  
+  message SigningPayloadRequest {
+    string payload = 1;
+  }
+  
+  message SigningPayloadResponse {
+    string jwt = 1;
+  }
+  
+  message WellKnownResponse {
+    string issuer = 1;
+    string jwksUri = 2;
+  }
+  
+  message JWKsResponse {
+    map<string, JWKEnc> keys = 1;
+  }
+  
+  message JWTEnc {
+    string jwt = 1;
+    int64 expires = 2;
+  }
+  
+  message JWKEnc {
+    string jwk = 1;
+    int64 expires = 2;
+  }
+
+  message Empty {}
