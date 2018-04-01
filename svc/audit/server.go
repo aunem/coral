@@ -8,10 +8,10 @@ import (
 	"github.com/go-pg/pg"
 
 	"github.com/adjust/rmq"
-	"github.com/kubecorp/coral/sdk/go/audit"
-	"github.com/kubecorp/coral/sdk/go/auth"
-	"github.com/kubecorp/coral/sdk/go/entity"
-	authsvc "github.com/kubecorp/coral/svc/auth"
+	"github.com/aunem/coral/sdk/go/audit"
+	"github.com/aunem/coral/sdk/go/auth"
+	"github.com/aunem/coral/sdk/go/entity"
+	authsvc "github.com/aunem/coral/svc/auth"
 )
 
 // Server represents an audit server

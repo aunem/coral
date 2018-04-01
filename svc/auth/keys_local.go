@@ -9,9 +9,9 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 
+	"github.com/aunem/coral/config"
+	entity "github.com/aunem/coral/sdk/go/entity"
 	"github.com/go-pg/pg"
-	"github.com/kubecorp/coral/config"
-	entity "github.com/kubecorp/coral/sdk/go/entity"
 	log "github.com/sirupsen/logrus"
 	context "golang.org/x/net/context"
 	jose "gopkg.in/square/go-jose.v2"

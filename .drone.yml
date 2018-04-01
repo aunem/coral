@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/github.com/kubecorp/coral
+  path: src/github.com/aunem/coral
 pipeline:
   deps:
     image: golang:1.9

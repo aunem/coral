@@ -8,10 +8,10 @@ import (
 
 	context "golang.org/x/net/context"
 
+	"github.com/aunem/coral/integration"
+	"github.com/aunem/coral/sdk/go/issuer"
+	. "github.com/aunem/coral/svc/issuer"
 	"github.com/go-pg/pg"
-	"github.com/kubecorp/coral/integration"
-	"github.com/kubecorp/coral/sdk/go/issuer"
-	. "github.com/kubecorp/coral/svc/issuer"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 )

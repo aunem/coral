@@ -7,11 +7,11 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
+	"github.com/aunem/coral/config"
+	"github.com/aunem/coral/sdk/go/entity"
+	"github.com/aunem/coral/util"
 	"github.com/go-pg/pg"
 	"github.com/imdario/mergo"
-	"github.com/kubecorp/coral/config"
-	"github.com/kubecorp/coral/sdk/go/entity"
-	"github.com/kubecorp/coral/util"
 	"github.com/satori/go.uuid"
 )
 

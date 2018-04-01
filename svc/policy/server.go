@@ -7,10 +7,10 @@ import (
 	"github.com/gobwas/glob"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/aunem/coral/config"
+	"github.com/aunem/coral/sdk/go/policy"
 	"github.com/go-pg/pg"
 	"github.com/imdario/mergo"
-	"github.com/kubecorp/coral/config"
-	"github.com/kubecorp/coral/sdk/go/policy"
 	uuid "github.com/satori/go.uuid"
 )
 

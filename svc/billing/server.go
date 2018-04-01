@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-pg/pg"
 
-	"github.com/kubecorp/coral/sdk/go/billing"
+	"github.com/aunem/coral/sdk/go/billing"
 )
 
 // Server represents a billing server

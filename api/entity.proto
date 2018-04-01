@@ -4,7 +4,7 @@ syntax = "proto3";
 package entity;
 import "google/api/annotations.proto";
 
-option go_package = "github.com/kubecorp/coral/sdk/go/entity";
+option go_package = "github.com/aunem/coral/sdk/go/entity";
 
 service EntityService {
 

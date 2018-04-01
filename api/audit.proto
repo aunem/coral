@@ -4,7 +4,7 @@ package audit;
 import "google/api/annotations.proto";
 import "api/entity.proto";
 
-option go_package = "github.com/kubecorp/coral/sdk/go/audit";
+option go_package = "github.com/aunem/coral/sdk/go/audit";
 
 service AuditService {
 
