@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	entity "github.com/kubecorp/coral/sdk/go/entity"
+	entity "github.com/aunem/coral/sdk/go/entity"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/require"
 	context "golang.org/x/net/context"

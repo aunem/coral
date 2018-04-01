@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/kubecorp/coral/sdk/go/auth"
+	"github.com/aunem/coral/sdk/go/auth"
 	context "golang.org/x/net/context"
 	"google.golang.org/grpc/metadata"
 )

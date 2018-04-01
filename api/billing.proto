@@ -3,7 +3,7 @@ syntax = "proto3";
 package billing;
 import "google/api/annotations.proto";
 
-option go_package = "github.com/kubecorp/coral/sdk/go/billing";
+option go_package = "github.com/aunem/coral/sdk/go/billing";
 
 service BillingService {
 

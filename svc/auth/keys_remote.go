@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	fmt "fmt"
 
+	"github.com/aunem/coral/sdk/go/issuer"
+	issuersvc "github.com/aunem/coral/svc/issuer"
 	oidc "github.com/coreos/go-oidc"
-	"github.com/kubecorp/coral/sdk/go/issuer"
-	issuersvc "github.com/kubecorp/coral/svc/issuer"
 	ocontext "golang.org/x/net/context"
 )
 

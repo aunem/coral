@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	auth "github.com/kubecorp/coral/sdk/go/auth"
-	entity "github.com/kubecorp/coral/sdk/go/entity"
-	"github.com/kubecorp/coral/sdk/go/policy"
+	auth "github.com/aunem/coral/sdk/go/auth"
+	entity "github.com/aunem/coral/sdk/go/entity"
+	"github.com/aunem/coral/sdk/go/policy"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/stretchr/testify/assert"
 	context "golang.org/x/net/context"

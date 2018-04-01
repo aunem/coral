@@ -1,9 +1,9 @@
 package issuer
 
 import (
+	"github.com/aunem/coral/sdk/go/issuer"
 	"github.com/go-pg/pg"
 	"github.com/imdario/mergo"
-	"github.com/kubecorp/coral/sdk/go/issuer"
 	"github.com/satori/go.uuid"
 	context "golang.org/x/net/context"
 )

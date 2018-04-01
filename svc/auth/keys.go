@@ -6,11 +6,11 @@ import (
 	fmt "fmt"
 	"strings"
 
-	"github.com/kubecorp/coral/config"
-	entity "github.com/kubecorp/coral/sdk/go/entity"
-	issuer "github.com/kubecorp/coral/sdk/go/issuer"
-	entitysvc "github.com/kubecorp/coral/svc/entity"
-	issuersvc "github.com/kubecorp/coral/svc/issuer"
+	"github.com/aunem/coral/config"
+	entity "github.com/aunem/coral/sdk/go/entity"
+	issuer "github.com/aunem/coral/sdk/go/issuer"
+	entitysvc "github.com/aunem/coral/svc/entity"
+	issuersvc "github.com/aunem/coral/svc/issuer"
 	log "github.com/sirupsen/logrus"
 	context "golang.org/x/net/context"
 )

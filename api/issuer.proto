@@ -4,7 +4,7 @@ syntax = "proto3";
 package issuer;
 import "google/api/annotations.proto";
 
-option go_package = "github.com/kubecorp/coral/sdk/go/issuer";
+option go_package = "github.com/aunem/coral/sdk/go/issuer";
 
 service IssuerService {
   rpc GetIssuer(IDQuery) returns (Issuer) {

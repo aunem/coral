@@ -1,4 +1,4 @@
-package: github.com/kubecorp/coral
+package: github.com/aunem/coral
 import:
 - package: github.com/golang/glog
 - package: github.com/golang/protobuf

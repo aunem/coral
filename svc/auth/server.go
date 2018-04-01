@@ -6,10 +6,10 @@ import (
 
 	"encoding/base64"
 
-	"github.com/kubecorp/coral/config"
-	auth "github.com/kubecorp/coral/sdk/go/auth"
-	entity "github.com/kubecorp/coral/sdk/go/entity"
-	entitysvc "github.com/kubecorp/coral/svc/entity"
+	"github.com/aunem/coral/config"
+	auth "github.com/aunem/coral/sdk/go/auth"
+	entity "github.com/aunem/coral/sdk/go/entity"
+	entitysvc "github.com/aunem/coral/svc/entity"
 	log "github.com/sirupsen/logrus"
 	context "golang.org/x/net/context"
 	"google.golang.org/grpc"

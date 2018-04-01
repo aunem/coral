@@ -4,9 +4,9 @@ import (
 	"flag"
 	"net/http"
 
+	pb "github.com/aunem/coral/api"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	pb "github.com/kubecorp/coral/api"
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"

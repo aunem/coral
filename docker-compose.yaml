@@ -4,14 +4,14 @@ services:
     image: golang:1.9
     container_name: build
     volumes:
-      - "./:/go/src/github.com/kubecorp/coral"
-    working_dir: /go/src/github.com/kubecorp/coral
+      - "./:/go/src/github.com/aunem/coral"
+    working_dir: /go/src/github.com/aunem/coral
     command: make build
   deps:
     image: golang:1.9
     container_name: build
     volumes:
-      - "./:/go/src/github.com/kubecorp/coral"
-    working_dir: /go/src/github.com/kubecorp/coral
+      - "./:/go/src/github.com/aunem/coral"
+    working_dir: /go/src/github.com/aunem/coral
     command: make deps
     
